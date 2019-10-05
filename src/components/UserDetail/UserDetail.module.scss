@@ -1,6 +1,7 @@
 .EmployeeList{
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   width:75%;
   margin-left: 25%;
 }
@@ -29,4 +30,23 @@
 .Address{
   border-top: 1px solid #d8b5b5;
   padding-top: 1rem;
+}
+
+@media screen and (max-width: 640px) {
+  .EmployeeList{
+    width:100%;
+    margin-left: 0;
+  }
+  .UserInfo{
+    width: 100%
+  }
+}
+@media screen and (min-width: 641px) and (max-width: 968px) {
+  .EmployeeList{
+    width:100%;
+    margin-left: 0;
+  }
+  .UserInfo{
+    width: 47%;
+  }
 }
