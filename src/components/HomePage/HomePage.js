@@ -2,27 +2,33 @@ import React, { Component } from "react";
 import InputForm from "../InputForm/InputForm";
 import Modal from "../../UI/Modal/Modal";
 import styles from "./HomePage.module.scss";
+import * as actionTypes from '../../store/actions/actions';
+import { connect } from 'react-redux';
+
 class HomePage extends Component {
-  state = {
-    getStarted: false
-  };
-  getStartedHandler = () => {
-    this.setState({
-      getStarted: !this.state.getStarted
-    });
-  };
   render() {
     return (
-      <>
-        <button className={styles.Button} onClick={this.getStartedHandler}>
+      <div className={styles.HomePage}>
+        <button className={styles.Button} onClick={this.props.ongetStartedHandler}>
           Get Started
         </button>
-        <Modal show={this.state.getStarted}>
+        <Modal show={this.props.getStrd}>
           <InputForm />
         </Modal>
-      </>
+      </div>
     );
   }
 }
 
-export default HomePage;
+const mapStateToProps = state =>{
+  return {
+    getStrd: state.reducer.getStarted
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    ongetStartedHandler : () => dispatch({type:actionTypes.GET_STARTED}) 
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps) (HomePage);

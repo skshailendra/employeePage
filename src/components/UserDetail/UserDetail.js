@@ -13,7 +13,7 @@ class UserDetail extends Component {
       .then(response => {
         const employeeData = [];
         for (let key in response.data) {
-          if (response.data[key].location === "Bangalore") {
+          if (response.data[key].officeAddress === "Bangalore") {
             response.data.officeAddress = `2870, Building Virgo, 
                    Bagmane Constellation Business Park,
                    Outer Ring Rd, Doddanekundi, 
@@ -27,8 +27,6 @@ class UserDetail extends Component {
           }
           employeeData.push(response.data[key]);
         }
-        debugger;
-        console.log(employeeData);
         this.setState({
           employeeData: employeeData
         });
@@ -39,29 +37,25 @@ class UserDetail extends Component {
   }
   render() {
     let displayEmployeeData = this.state.employeeData ? (
-      <div className="employeeList">
-        <ul>
-          {this.state.employeeData.map(emp => (
-            <>
-              <div className={styles.UserInfo}>
-                <li>Name {emp.name}</li>
-                <li>OracleId :{emp.oracleId}</li>
-                <li>Skillset :{emp.skillset}</li>
-                <li>location :{emp.location}</li>
-                <li>Office Address :{emp.officeAddress}</li>
-              </div>
-            </>
+        <ul className={styles.EmployeeList}>
+          {this.state.employeeData.map( (emp,idx) => (
+              <li key={idx} className={styles.UserInfo}>
+                <h4>{emp.name}</h4>
+                <span>OracleId :{emp.oracleId}</span>
+                <span>Skillset :{emp.skillSet}</span>
+                <span>location :{emp.location}</span>
+                <span className={styles.Address}>Office Address :{emp.officeAddress}</span>
+              </li>
           ))}
         </ul>
-      </div>
     ) : null;
     return (
-      <div className={styles.Container}>
-        <div className={styles.UserInfo}>
-          <p className={styles.EmpHeading}>Employee Details</p>
-          {displayEmployeeData}
-        </div>
-      </div>
+      <>
+      <h3 className={styles.EmpHeading}>Employee Details</h3>
+      
+      {displayEmployeeData}
+      
+      </>
     );
   }
 }

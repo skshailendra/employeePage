@@ -1,13 +1,10 @@
 import React from 'react';
 import './App.scss';
-import { BrowserRouter } from 'react-router-dom';
-import EmployeeApp from './EmployeeApp';
+import EmployeeApp from './components/EmployeeApp/EmployeeApp';
 
 function App() {
   return (
-      <BrowserRouter>
-        <EmployeeApp/>
-      </BrowserRouter>
+      <EmployeeApp/>
   );
 }
 

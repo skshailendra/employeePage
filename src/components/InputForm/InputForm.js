@@ -2,12 +2,14 @@ import React, { Component } from "react";
 import Formdata from "../../Formdata/formdata";
 import { withRouter } from "react-router-dom";
 import Input from "../../UI/Input/Input";
+import * as actionTypes from '../../store/actions/actions';
 import axios from "axios";
+import { connect } from 'react-redux';
 class InputForm extends Component {
-  state = {
-    Formdata,
-    formsIsValid: false
-  };
+  // state = {
+  //   Formdata,
+  //   formsIsValid: false
+  // };
 
   componentDidMount() {
     console.log(this.props);
@@ -20,36 +22,36 @@ class InputForm extends Component {
     }
     return isValid;
   };
-  inputChangedHandler = (event, id) => {
-    const copyFormData = {
-      ...this.state.Formdata
-    };
-    const copyFormId = {
-      ...copyFormData[id]
-    };
-    copyFormId.value = event.target.value;
-    copyFormData[id] = copyFormId;
-    copyFormData[id].valid = this.checkValidation(
-      copyFormId.value,
-      copyFormId.validation
-    );
-    copyFormId.touched = true;
-    let formsIsValid = true;
-    for (let ipInden in copyFormData) {
-      formsIsValid = copyFormData[ipInden].valid && formsIsValid;
-    }
-    console.log(formsIsValid);
-    this.setState({
-      Formdata: copyFormData,
-      formsIsValid: formsIsValid
-    });
-  };
+  // inputChangedHandler = (event, id) => {
+  //   const copyFormData = {
+  //     ...this.state.Formdata
+  //   };
+  //   const copyFormId = {
+  //     ...copyFormData[id]
+  //   };
+  //   copyFormId.value = event.target.value;
+  //   copyFormData[id] = copyFormId;
+  //   copyFormData[id].valid = this.checkValidation(
+  //     copyFormId.value,
+  //     copyFormId.validation
+  //   );
+  //   copyFormId.touched = true;
+  //   let formsIsValid = true;
+  //   for (let ipInden in copyFormData) {
+  //     formsIsValid = copyFormData[ipInden].valid && formsIsValid;
+  //   }
+  //   console.log(formsIsValid);
+  //   this.setState({
+  //     Formdata: copyFormData,
+  //     formsIsValid: formsIsValid
+  //   });
+  // };
 
   submitHandler = event => {
     event.preventDefault();
     const formData = {};
-    for (let formElem in this.state.Formdata) {
-      formData[formElem] = this.state.Formdata[formElem].value;
+    for (let formElem in this.props.Formdata) {
+      formData[formElem] = this.props.Formdata[formElem].value;
     }
     console.log(formData);
     // Call HTTP service and post this formdata
@@ -68,10 +70,10 @@ class InputForm extends Component {
   };
   render() {
     const formsElemArray = [];
-    for (let key in this.state.Formdata) {
+    for (let key in this.props.Formdata) {
       formsElemArray.push({
         id: key,
-        config: this.state.Formdata[key]
+        config: this.props.Formdata[key]
       });
     }
     let form = (
@@ -86,14 +88,25 @@ class InputForm extends Component {
             invalid={!formElem.config.valid}
             shouldValidate={formElem.config.validation}
             touched={formElem.config.touched}
-            changed={event => this.inputChangedHandler(event, formElem.id)}
+            changed={event => this.props.inptChangedHandler(event, formElem.id,this.checkValidation)}
           />
         ))}
-        <button disabled={!this.state.formsIsValid}>Submit Form</button>
+        <button disabled={!this.props.formsValid}>Submit Form</button>
       </form>
     );
     return <div className="Forms">{form}</div>;
   }
 }
+const mapStateToProps = state =>{
+  return {
+    Formdata: state.inputform.Formdata,
+    formsValid: state.inputform.formsIsValid
+  }
+}
 
-export default withRouter(InputForm);
+const mapDispatchToProps = dispatch => {
+  return {
+    inptChangedHandler : (event,id,checkValidation) => dispatch({type:actionTypes.FORMS_VALID, event:event, id:id , checkValidation:checkValidation}) 
+  }
+}
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(InputForm));

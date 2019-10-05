@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Route, Link } from 'react-router-dom';
-import HomePage from './components/HomePage/HomePage';
-import UserDetail from './components/UserDetail/UserDetail';
+import HomePage from '../HomePage/HomePage';
+import UserDetail from '../UserDetail/UserDetail';
+import styles from "./EmployeeApp.module.scss";
 class EmployeeApp extends Component {
     render () {
         return (
             <>
                 <nav>
-                    <ul className="Menu">
+                    <ul className={styles.Menu}>
                         <li><Link to='/'>App</Link></li>
                         <li><Link to='/user-details'>UserDetail</Link></li>
                         {/* <li className="item button"><a href="#">Log In</a></li>
