@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import styles from "./UserDetail.module.scss";
 import axios from "axios";
+import {FormURL} from '../../store/url-store';
 class UserDetail extends Component {
   state = {
     employeeData: []
   };
 
   componentDidMount() {
-    console.log("called");
     axios
-      .get("https://react-hooks-7d44e.firebaseio.com/employeeData.json")
+      .get(FormURL)
       .then(response => {
         const employeeData = [];
         for (let key in response.data) {

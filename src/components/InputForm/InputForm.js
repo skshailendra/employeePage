@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import Formdata from "../../Formdata/formdata";
 import { withRouter } from "react-router-dom";
 import Input from "../../UI/Input/Input";
 import * as actionTypes from '../../store/actions/actions';
 import axios from "axios";
 import { connect } from 'react-redux';
+import {FormURL} from '../../store/url-store';
 import styles from './InputForm.module.scss';
+
 class InputForm extends Component {
   // Check Validation
   checkValidation = (value, rules) => {
@@ -16,17 +17,17 @@ class InputForm extends Component {
     return isValid;
   };
   
+  // Submit the Form 
   submitHandler = event => {
     event.preventDefault();
     const formData = {};
     for (let formElem in this.props.Formdata) {
       formData[formElem] = this.props.Formdata[formElem].value;
     }
-    console.log(formData);
     // Call HTTP service and post this formdata
     axios
       .post(
-        "https://react-hooks-7d44e.firebaseio.com/employeeData.json",
+        FormURL,
         formData
       )
       .then(response => {
@@ -66,13 +67,15 @@ class InputForm extends Component {
     return <div className="Forms">{form}</div>;
   }
 }
+
+// Managing the State in Redux
 const mapStateToProps = state =>{
   return {
     Formdata: state.inputform.Formdata,
     formsValid: state.inputform.formsIsValid
   }
 }
-
+// Managing the Dispatch Action in Redux
 const mapDispatchToProps = dispatch => {
   return {
     inptChangedHandler : (event,id,checkValidation) => dispatch({type:actionTypes.FORMS_VALID, event:event, id:id , checkValidation:checkValidation}) 
