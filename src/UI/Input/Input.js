@@ -33,9 +33,9 @@ const input = (props) => {
             break;
         case('radio'):
             inputElem = (
-                <>
+                <div className={styles.RadioButton}>
                     {props.elementconfig.options.map(option =>(
-                        <label key={option.value}>
+                        <label className={styles.RadioLabel} key={option.value}>
                             {option.displayValue}
                             <input type={props.elementtype} className={inputClasses.join(' ')} 
                             checked={props.value === option.value}
@@ -44,7 +44,7 @@ const input = (props) => {
                         </label> 
                     ))
                     }
-                </>
+                </div>
             );
             break;
         default:

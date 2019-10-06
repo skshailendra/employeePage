@@ -5,6 +5,7 @@ import Input from "../../UI/Input/Input";
 import * as actionTypes from '../../store/actions/actions';
 import axios from "axios";
 import { connect } from 'react-redux';
+import styles from './InputForm.module.scss';
 class InputForm extends Component {
   // state = {
   //   Formdata,
@@ -22,31 +23,7 @@ class InputForm extends Component {
     }
     return isValid;
   };
-  // inputChangedHandler = (event, id) => {
-  //   const copyFormData = {
-  //     ...this.state.Formdata
-  //   };
-  //   const copyFormId = {
-  //     ...copyFormData[id]
-  //   };
-  //   copyFormId.value = event.target.value;
-  //   copyFormData[id] = copyFormId;
-  //   copyFormData[id].valid = this.checkValidation(
-  //     copyFormId.value,
-  //     copyFormId.validation
-  //   );
-  //   copyFormId.touched = true;
-  //   let formsIsValid = true;
-  //   for (let ipInden in copyFormData) {
-  //     formsIsValid = copyFormData[ipInden].valid && formsIsValid;
-  //   }
-  //   console.log(formsIsValid);
-  //   this.setState({
-  //     Formdata: copyFormData,
-  //     formsIsValid: formsIsValid
-  //   });
-  // };
-
+  
   submitHandler = event => {
     event.preventDefault();
     const formData = {};
@@ -77,7 +54,7 @@ class InputForm extends Component {
       });
     }
     let form = (
-      <form onSubmit={this.submitHandler}>
+      <form onSubmit={this.submitHandler} className={styles.FormElement}>
         {formsElemArray.map(formElem => (
           <Input
             key={formElem.id}
@@ -91,7 +68,7 @@ class InputForm extends Component {
             changed={event => this.props.inptChangedHandler(event, formElem.id,this.checkValidation)}
           />
         ))}
-        <button disabled={!this.props.formsValid}>Submit Form</button>
+        <button className={styles.SubmitForm}  disabled={!this.props.formsValid}>Submit Form</button>
       </form>
     );
     return <div className="Forms">{form}</div>;
