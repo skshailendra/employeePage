@@ -9,7 +9,7 @@ class UserDetail extends Component {
   componentDidMount() {
     console.log("called");
     axios
-      .get("https://employeename-ad814.firebaseio.com/employeeData.json")
+      .get("https://react-hooks-7d44e.firebaseio.com/employeeData.json")
       .then(response => {
         const employeeData = [];
         for (let key in response.data) {

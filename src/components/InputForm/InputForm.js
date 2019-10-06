@@ -7,14 +7,6 @@ import axios from "axios";
 import { connect } from 'react-redux';
 import styles from './InputForm.module.scss';
 class InputForm extends Component {
-  // state = {
-  //   Formdata,
-  //   formsIsValid: false
-  // };
-
-  componentDidMount() {
-    console.log(this.props);
-  }
   // Check Validation
   checkValidation = (value, rules) => {
     let isValid = true;
@@ -34,7 +26,7 @@ class InputForm extends Component {
     // Call HTTP service and post this formdata
     axios
       .post(
-        "https://employeename-ad814.firebaseio.com/employeeData.json",
+        "https://react-hooks-7d44e.firebaseio.com/employeeData.json",
         formData
       )
       .then(response => {
