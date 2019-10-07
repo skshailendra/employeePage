@@ -12,7 +12,7 @@ class HomePage extends Component {
         <button className={styles.Button} onClick={this.props.ongetStartedHandler}>
           Get Started
         </button>
-        <Modal show={this.props.getStrd}>
+        <Modal show={this.props.getStrd}  closeModal={this.props.ongetStartedHandler}>
           <InputForm />
         </Modal>
       </div>
