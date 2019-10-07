@@ -1,6 +1,6 @@
 .Modal {
     position: fixed;
-    z-index: 1;
+    z-index: 999;
     background-color: #e2d8c582;
     width: 70%;
     border: 1px solid #ccc;
@@ -12,4 +12,13 @@
   }
   .hideModal{
     display: none;
+  }
+  .ModalBackground{
+    background-color: rgba(236, 222, 222, 0.884);
+    position: absolute;
+    top:0;
+    left:0;
+    z-index:998;
+    width:100%;
+    height:100%;
   }
