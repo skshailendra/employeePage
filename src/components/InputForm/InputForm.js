@@ -8,15 +8,6 @@ import {FormURL} from '../../store/url-store';
 import styles from './InputForm.module.scss';
 
 class InputForm extends Component {
-  // Check Validation
-  checkValidation = (value, rules) => {
-    let isValid = true;
-    if (rules && rules.required) {
-      isValid = value.trim() !== "" && isValid;
-    }
-    return isValid;
-  };
-  
   // Submit the Form 
   submitHandler = event => {
     event.preventDefault();
@@ -78,7 +69,7 @@ const mapStateToProps = state =>{
 // Managing the Dispatch Action in Redux
 const mapDispatchToProps = dispatch => {
   return {
-    inptChangedHandler : (event,id,checkValidation) => dispatch({type:actionTypes.FORMS_VALID, event:event, id:id , checkValidation:checkValidation}) 
+    inptChangedHandler : (event,id,checkValidation) => dispatch({type:actionTypes.FORMS_VALID, event:event, id:id}) 
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(withRouter(InputForm));
