@@ -7,8 +7,10 @@ export const getStarted = () => {
   };
 };
 
-export const formValid = () => {
+export const formValid = (event, id) => {
   return {
-    type: FORMS_VALID
+    type: FORMS_VALID,
+    event: event,
+    id: id
   };
 };
