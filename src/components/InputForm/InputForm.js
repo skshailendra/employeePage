@@ -69,7 +69,7 @@ const mapStateToProps = state =>{
 // Managing the Dispatch Action in Redux
 const mapDispatchToProps = dispatch => {
   return {
-    inptChangedHandler : (event,id,checkValidation) => dispatch({type:actionTypes.FORMS_VALID, event:event, id:id}) 
+    inptChangedHandler : (event,id,checkValidation) => dispatch(actionTypes.formValid(event, id)) 
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps)(withRouter(InputForm));
