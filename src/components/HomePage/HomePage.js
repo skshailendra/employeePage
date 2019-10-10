@@ -28,7 +28,7 @@ const mapStateToProps = state =>{
 
 const mapDispatchToProps = dispatch => {
   return {
-    ongetStartedHandler : () => dispatch({type:actionTypes.GET_STARTED}) 
+    ongetStartedHandler : () => dispatch(actionTypes.getStarted()) 
   }
 }
 export default connect(mapStateToProps,mapDispatchToProps) (HomePage);
