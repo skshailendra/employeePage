@@ -7,10 +7,20 @@ export const getStarted = () => {
   };
 };
 
-export const formValid = (event, id) => {
+export const saveFormValid = (event, id) => {
   return {
     type: FORMS_VALID,
     event: event,
     id: id
   };
+};
+
+export const formValid = (event, id) => {
+  event.persist();
+  return dispatch => {
+    setTimeout( ()=>{
+      console.log(event.target.value);
+      return dispatch(saveFormValid(event,id));
+    }, 2000)
+  }
 };
