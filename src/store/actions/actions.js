@@ -21,6 +21,6 @@ export const formValid = (event, id) => {
     setTimeout( ()=>{
       console.log(event.target.value);
       return dispatch(saveFormValid(event,id));
-    }, 50)
+    },0)
   }
 };
