@@ -1,0 +1,11 @@
+.FormElement{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+.SubmitForm{
+    align-self: flex-start;
+    margin-left: 10px;
+    height: 29px;
+    width: 90px;
+}
